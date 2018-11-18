@@ -1,0 +1,9 @@
+\babel@toc {english}{}
+\contentsline {section}{\numberline {1}Introduction}{3}
+\contentsline {subsection}{\numberline {1.1}Problem statement}{3}
+\contentsline {subsection}{\numberline {1.2}Summary of the work}{3}
+\contentsline {section}{\numberline {2}Design and implementation}{4}
+\contentsline {section}{\numberline {3}Experimental evaluation}{6}
+\contentsline {subsection}{\numberline {3.1}Experimental setup}{6}
+\contentsline {subsection}{\numberline {3.2}Results}{6}
+\contentsline {section}{\numberline {4}Conclusions and Future Works}{7}
