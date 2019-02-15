@@ -183,9 +183,14 @@ MobileDeviceManager class extends DatacenterBroker class. So it implemented the 
 \subsection{Task-based Application Design and Implementation}
 
 \subsubsection{Task-based Application Design}
-In EdgeCloudSim, task is atomic and cannot be divided into smaller tasks. Task-based application is an application which is composed by several smaller This project designs how to introduce a task-based 
-What is task-based application
-Introduce task-dependency graph
+In EdgeCloudSim, task is atomic and cannot be divided into smaller tasks. Task-based application is an application which is composed by several smaller tasks. There may also have dependencies among these tasks. For instance, one sub-task can only starts after another sub-task. 
+
+There are two ways to implemented tasked-based application feature in EdgeCloudSim. The first one is to change the code of CloudSim and add task-based features. The second one is to change the code of EdgeCloudSim and add the feature of tasked-based application.
+
+We can define how to divide task in XML file and store their dependencies. In the simulation, so we choose only submit a task to virtual machine when its dependencies has been met. In the SimManager class, the startEntity() function creates all the virtual machines in cloud server, edge server and mobile server. Besides, it also submits all the tasks to virtual machines. But in this project, we only submit the tasks whose dependencies has been met at this time. When a task is finished, it will send a CLOUDLET\_RETURN event to DatacenterBroker. In EdgeCloudSim, this event will be sent to MobileDeviceManager. Then processCloudletReturn function will be triggered. So when a task is finished, the tasks that have not been submitted will be checked. If there are tasks whose dependencies has been met now, it will be submitted to the VM at this time. The submit of tasks are based on the schedule function. We implement these functions in MobileDeviceManager class.
+
+In processCloudletReturn function, it will test the execution place of the task, if it is executed in GENERIC\_EDGE\_DEVICE\_ID, the download delay will be added to the task, if it is executed in mobile device, the delay do not need to be add. We can test whether we need to submit new tasks to virtual machines at the  beginning of the function. 
+
 
 \subsubsection{Scheduling Algorithm in EdgeCloudSim}
 Which module can we modify to achieve task-based application?

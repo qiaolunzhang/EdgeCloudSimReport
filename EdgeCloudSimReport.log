@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2018.6.15)  15 FEB 2019 09:01
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2018.6.15)  15 FEB 2019 10:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -508,10 +508,10 @@ Overfull \hbox (221.83203pt too wide) in paragraph at lines 164--165
 EDGE_DEVICES. 
  []
 
-[4] [5]
+[4] [5] [6]
 File: frog.jpg Graphic file (type bmp)
 <frog.jpg>
- [6] [7] [8] (./EdgeCloudSimReport.aux)
+ [7] [8] (./EdgeCloudSimReport.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -519,10 +519,10 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  12358 strings out of 492970
  247157 string characters out of 6137298
- 302785 words of memory out of 5000000
+ 301785 words of memory out of 5000000
  16112 multiletter control sequences out of 15000+600000
  8324 words of font info for 47 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 62i,8n,80p,552b,706s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,8n,80p,994b,706s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on EdgeCloudSimReport.pdf (9 pages).
