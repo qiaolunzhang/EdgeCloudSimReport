@@ -69,7 +69,7 @@
 \begin{minipage}{0.4\textwidth}
 \begin{flushleft} \large
 \emph{Author:}\\
-Zhang Qiaolun \textsc{Smith} % Your name
+Zhang \textsc{Qiaolun} % Your name
 \end{flushleft}
 \end{minipage}
 ~
@@ -106,19 +106,46 @@ Michele \textsc{Zanella} % Supervisor's Name
 
 
 \begin{abstract}
-Your abstract. - Summarize your work.
+The simulation tool EdgeCloudSim provides some basic features of simulating edge computing scenarios. But it lacks some further features. This project extends basic task application definition to support task-based application.
 \end{abstract}
 
 \section{Introduction}
 
-Your introduction goes here! Some examples of commonly used commands and features are listed below, to help you get started.
+EdgeCloudSim is a simulation tool which can simulate Edge Computing scenarios. But this tool can not simulate task-based application. The project adds the following features to the simulation tool:
 
-If you have a question, please use the support box in the bottom right of the screen to get in touch. 
+\begin{enumerate}
+	\item Extend basic task application definition to support task-based application
+	\item Task migration among the Edge or Cloud VMs
+	\item Add probabilistic network failure model by considering the congestion or other parameters such as the distance between mobile device and the WiFi access point.
+	\item Visual tool for displaying the network topology
+\end{enumerate}
 
 
-\section{Design and Implementation}
+In the end, this project gives a detailed simulation and provides the simulation results.
 
-\subsection{EdgeCloudSim and CloudSim}
+
+\section{Relation between EdgeCloudSim and Cloudsim}
+
+\subsection{Simulation Framework of CloudSim}
+\subsubsection{Simulation Data Flow}
+CloudSim is a discrete event management framework. The core simulation process is a loop function which checks the events related to all the entities and processes the event. Each entities can process different kinds of events. So figuring out all the 
+
+\subsubsection{Data center internal processing}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/2-updateCloudletProcessing.pdf}
+	\caption{\label{fig:cloudletProcessing}Call hierarchy of function updateCloudletProcessing.}
+\end{figure}
+
+Figure 1 shows the call hierarchy of member function updateCloudletProcessing in class DataCenter. From this figure, we can figure out that the Cloudlet processing update process figure in the paper about CloudSim is wrong. Figure 2 is the fixed Cloudlet processing update process. At the end of the function updateCloudletProcessing, it will add a new VM\_DATACENTER\_EVENT to the future queue using function schedule. When we go back to the loop of Run function, the updateCloudletProcessing function will be triggered again.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/3-processingSequence.png}
+	\caption{\label{fig:processingSequence}Cloudlet processing update process.}
+\end{figure}
+
+\subsection{Simulation Framework of EdgeCloudSim}
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{./figures/1-edgecloudsim_diagram.png}
@@ -128,16 +155,51 @@ If you have a question, please use the support box in the bottom right of the sc
 As is shown in the picture1, there are two important classes in core package: ScenarioFactory and SimManager. The ScenarioFactory gets the parameters for the scenarios. And the SimManager receives the object of type ScenarioFactory. Moreover, the SimManager is a class extended from SimEntity class. The SimEntity is a class defined in CloudSim. And it has a function called startEntity(), which will schedule the task. 
 \todo[inline, color=green!40]{Not sure if I can implement the task-based application here or change the schedule function in CloudSim}
 
+\subsection{Modules in EdgeCloudsim}
+\begin{enumerate}
+	\item core: three are there important class in this module. ScenarioFactory.java is the class for factory scheme. SimManager.java class extends SimEntity class and it is related to CREATE\_TASK, CHECK\_ALL\_VM, GET\_LOAD\_LOG, PRINT\_PROGRESS, STOP\_SIMULATION. SimSettings.java is the class that stores all the configurations.
+	\item cloud\_server: class CloudServerManager.java. This class actually just generate the hostlist, vmlist, local data center, and function to get the average utilization of all VMS. 
+	\item edge\_server: class EdgeServerManager.java has similar functions as CloudServer.
+	\item mobile\_processing: class MobileServerManager.java. This class enables the mobile devices have the ability to process task. We can also create data centers and virtual machines on it.
+	\item edge\_client: MobileDeviceManager.java extends DatacenterBroker class in CloudSim. And it overwrite the processOtherEvent function and add new events: REQUEST\_RECEIVED\_BY\_CLOUD, REQUEST\_RECEIVED\_BY\_EDGE\_EDGE\_DEVICES.
+\end{enumerate}
 
-\subsection{Relationship Between Modules}
 
-\subsection{Task-based Application}
+\subsection{Entities in EdgeCloudsim}
+\begin{enumerate}
+	\item SimManager: public class SimManager extends SimEntity
+	\item MobileDeviceManager: public abstract class MobileDeviceManager  extends DatacenterBroker
+	\item EdgeOrchestrator: public abstract class EdgeOrchestrator extends SimEntity
+\end{enumerate}
+
+
+\subsection{Relationship of Modules between CloudSim and EdgeCloudSim}
+Because EdgeCloudSim is implemented on the top of CloudSim, it also relies on the discrete event management framework. 
+MobileDeviceManager class extends DatacenterBroker class. So it implemented the following functions
+
+
+\section{Design and Implementation}
+
+\subsection{Task-based Application Design and Implementation}
+
+\subsubsection{Task-based Application Design}
+In EdgeCloudSim, task is atomic and cannot be divided into smaller tasks. Task-based application is an application which is composed by several smaller This project designs how to introduce a task-based 
+What is task-based application
+Introduce task-dependency graph
+
+\subsubsection{Scheduling Algorithm in EdgeCloudSim}
+Which module can we modify to achieve task-based application?
+How to deal with task-dependency graph
+
+\subsubsection{Component Diagram of the Simulation tool}
+After adding the feature, the component diagram has changed.
 
 \subsection{Task Migration}
 
 \subsection{Probabilistic Network Failure Model}
 
 \section{Experimental Results}
+In this section, we did some experiment. We test the failure rate.
 
 \section{Conclusions}
 
