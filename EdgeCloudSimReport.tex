@@ -180,17 +180,103 @@ MobileDeviceManager class extends DatacenterBroker class. So it implemented the 
 
 \section{Design and Implementation}
 
+\subsection{Scheduling in EdgeCloudSim}
+
+
 \subsection{Task-based Application Design and Implementation}
 
-\subsubsection{Task-based Application Design}
+\subsubsection{Task Lifecycle}
 In EdgeCloudSim, task is atomic and cannot be divided into smaller tasks. Task-based application is an application which is composed by several smaller tasks. There may also have dependencies among these tasks. For instance, one sub-task can only starts after another sub-task. 
 
 There are two ways to implemented tasked-based application feature in EdgeCloudSim. The first one is to change the code of CloudSim and add task-based features. The second one is to change the code of EdgeCloudSim and add the feature of tasked-based application.
 
-We can define how to divide task in XML file and store their dependencies. In the simulation, so we choose only submit a task to virtual machine when its dependencies has been met. In the SimManager class, the startEntity() function creates all the virtual machines in cloud server, edge server and mobile server. Besides, it also submits all the tasks to virtual machines. But in this project, we only submit the tasks whose dependencies has been met at this time. When a task is finished, it will send a CLOUDLET\_RETURN event to DatacenterBroker. In EdgeCloudSim, this event will be sent to MobileDeviceManager. Then processCloudletReturn function will be triggered. So when a task is finished, the tasks that have not been submitted will be checked. If there are tasks whose dependencies has been met now, it will be submitted to the VM at this time. The submit of tasks are based on the schedule function. We implement these functions in MobileDeviceManager class.
+We can define how to divide applications in XML file and store their dependencies.
+
+The process of submit a task is as follows.
+
+
+Figure 4 shows how generate the task list in LoadGenerator class.
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/Generate-task-LoadGenerator.png}
+	\caption{\label{fig:frog}Generating Task List in LoadGenerator class.}
+\end{figure}
+
+Figure 5 shows how we submit the task using the schedule function.
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/schedule-submitTask.png}
+	\caption{\label{fig:frog}Submit The Task Using the Schedule Function.}
+\end{figure}
+
+
+Figure 6 shows when we come to the clock tick in EdgeCloudSim, the event will be processed.
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/5-SimManager-ProcessEvent-CREAT_TASK.png}
+	\caption{\label{fig:frog}CREATE\_TASK event in in SimManager class.}
+\end{figure}
+
+Figure 7 shows the submitTask function in class MobileDeviceManager. MobileDeviceManager is extended from Broker. We can notice that the task created is added to log list in this class. The task is distinguished from other tasks by its CloudletId. 
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/4-submitTask-SampleMobileDeviceManager.png}
+	\caption{\label{fig:frog}Task Submitted to the CloudSim Base in SampleMobileDeviceManager.java class.}
+\end{figure}
+
+Figure 8 what we do when the task finished. EdgeCloudSim will change the parameters concerning with execution time, the status in SimLogger class. Actually, we can submit new subtasks in this function. We can add a new field to Task.java class to determine whetehr the task is a subtask or an atomic task.
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/processCloudletReturn.png}
+	\caption{\label{fig:frog}ProcessCloudletReturn Function is Executed in MobileDeviceManager class.}
+\end{figure}
+
+ In the simulation, so we choose only submit a task to virtual machine when its dependencies has been met. In the SimManager class, the startEntity() function creates all the virtual machines in cloud server, edge server and mobile server. Besides, it also submits all the tasks to virtual machines. But in this project, we only submit the tasks whose dependencies has been met at this time. When a task is finished, it will send a CLOUDLET\_RETURN event to DatacenterBroker. In EdgeCloudSim, this event will be sent to MobileDeviceManager. Then processCloudletReturn function will be triggered. So when a task is finished, the tasks that have not been submitted will be checked. If there are tasks whose dependencies has been met now, it will be submitted to the VM at this time. The submit of tasks are based on the schedule function. We implement these functions in MobileDeviceManager class.
 
 In processCloudletReturn function, it will test the execution place of the task, if it is executed in GENERIC\_EDGE\_DEVICE\_ID, the download delay will be added to the task, if it is executed in mobile device, the delay do not need to be add. We can test whether we need to submit new tasks to virtual machines at the  beginning of the function. 
 
+\subsubsection{Task-based Application Design}
+In this section introduces the design of task-based application based on EdgeCloudSim.
+
+\subsubsection{Structure and Loading of Applications.xml}
+The Applications.xml describes the types and parameters of applications in the simulation. Parameters in the original Applications.xml file of EdgeCloudSim is not explained, which makes it difficult to understand the meaning of these parameters. Figure 9 is an example of configurations of task-based applications. Figure 10 shows the original configurations of atomic applications.
+The meanings of the parameters are listed as follows:
+
+\begin{enumerate}
+	\item usage\_percentage: The usage percentage here is used to decide the percentage of this type of application in all of the tasks generated. So add up usage\_percentage field in the applications.xml, we can get 100 because we have sumed up all the percentages of all applications.
+	\item prob\_cloud\_selection: The probability that we choose the cloud to execute the task.
+	\item poisson\_interarrival:
+	\item active\_period: In active period, the edge devices can generate new tasks.
+	\item idle\_period: In idle period, the edge devices can not generate new tasks.
+\end{enumerate}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/task-based-xml.png}
+	\caption{\label{fig:frog}Example of XML file of Task-based applications.}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/atomic-application-xml.png}
+	\caption{\label{fig:frog}Example of XML file of Atomic Applications.}
+\end{figure}
+
+The parameters are loaded in SimSettings.java. A new class called TaskBasedApplication.java is also implemented. The parameters of the applications and sub-applications are stored in the following two variables.
+
+\begin{enumerate}
+	\item private double[][] taskLookUpTable: store the parameters of applications.
+	\item private double[][] subtaskLookUpTable: store the parameters of sub-applications.
+	\item private TaskBasedApplication[] dependencyLookUpTable: store the dependency of each task-based application.
+\end{enumerate}
+
+
+\subsubsection{Sub-task Submission Using Topological Order}
+In this project, a class called TaskBasedTask.java is implemented to store the information of task-based task. This class can store the dependencies between each sub-tasks. We can trigger a function in the class to record the tasks that have finished. Moreover, it can calculate the sub-tasks that can be executed at this time.
+
+The dependencies of sub-task in task-based applications are handled in class TaskBasedapplication. This class can check the status of each task using two private variables called submitted and dependency. Variable submitted checks whether the sub-task can be 
+
+Distinguish betwee tasks and applications. 
 
 \subsubsection{Scheduling Algorithm in EdgeCloudSim}
 Which module can we modify to achieve task-based application?

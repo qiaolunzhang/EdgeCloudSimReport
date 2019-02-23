@@ -9,7 +9,7 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.2}Data center internal processing}{2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Simulation Framework of EdgeCloudSim}{2}}
 \@writefile{tdo}{\contentsline {todo}{\color@fb@x {}{black}{}{green!40}{\leavevmode {\color  {green!40}o}}\ Not sure if I can implement the task-based application here or change the schedule function in CloudSim}{2}}
-\pgfsyspdfmark {pgfid1}{20055325}{15207982}
+\pgfsyspdfmark {pgfid1}{20055326}{15231546}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Modules in EdgeCloudsim}{2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Cloudlet processing update process.}}{3}}
 \newlabel{fig:processingSequence}{{2}{3}}
@@ -18,28 +18,46 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Entities in EdgeCloudsim}{4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Relationship of Modules between CloudSim and EdgeCloudSim}{5}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Design and Implementation}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Task-based Application Design and Implementation}{5}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Task-based Application Design}{5}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Scheduling Algorithm in EdgeCloudSim}{6}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}Component Diagram of the Simulation tool}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Task Migration}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Probabilistic Network Failure Model}{6}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Results}{6}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{6}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Some \LaTeX  {} Examples}{6}}
-\newlabel{sec:examples}{{6}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Sections}{6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces This is a figure caption.}}{7}}
-\newlabel{fig:frog}{{4}{7}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces An example table.}}{7}}
-\newlabel{tab:widgets}{{1}{7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Comments}{7}}
-\@writefile{tdo}{\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color  {orange}o}}\ Here's a comment in the margin!}{7}}
-\pgfsyspdfmark {pgfid2}{31331843}{20997222}
-\pgfsyspdfmark {pgfid5}{34931997}{21011574}
-\pgfsyspdfmark {pgfid6}{36357404}{20743008}
-\@writefile{tdo}{\contentsline {todo}{\color@fb@x {}{black}{}{green!40}{\leavevmode {\color  {green!40}o}}\ This is an inline comment.}{7}}
-\pgfsyspdfmark {pgfid7}{20055325}{18204696}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Tables and Figures}{7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Mathematics}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Lists}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Scheduling in EdgeCloudSim}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Task-based Application Design and Implementation}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Task Lifecycle}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Generating Task List in LoadGenerator class.}}{6}}
+\newlabel{fig:frog}{{4}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Submit The Task Using the Schedule Function.}}{6}}
+\newlabel{fig:frog}{{5}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces CREATE\_TASK event in in SimManager class.}}{7}}
+\newlabel{fig:frog}{{6}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Task Submitted to the CloudSim Base in SampleMobileDeviceManager.java class.}}{8}}
+\newlabel{fig:frog}{{7}{8}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Task-based Application Design}{8}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}Structure and Loading of Applications.xml}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces ProcessCloudletReturn Function is Executed in MobileDeviceManager class.}}{9}}
+\newlabel{fig:frog}{{8}{9}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.4}Sub-task Submission Using Topological Order}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Example of XML file of Task-based applications.}}{11}}
+\newlabel{fig:frog}{{9}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Example of XML file of Atomic Applications.}}{11}}
+\newlabel{fig:frog}{{10}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.5}Scheduling Algorithm in EdgeCloudSim}{12}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.6}Component Diagram of the Simulation tool}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Task Migration}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Probabilistic Network Failure Model}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Results}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Some \LaTeX  {} Examples}{12}}
+\newlabel{sec:examples}{{6}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Sections}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Comments}{12}}
+\@writefile{tdo}{\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color  {orange}o}}\ Here's a comment in the margin!}{12}}
+\pgfsyspdfmark {pgfid2}{31332540}{15890295}
+\pgfsyspdfmark {pgfid5}{34931998}{15905040}
+\pgfsyspdfmark {pgfid6}{36357406}{15636343}
+\@writefile{tdo}{\contentsline {todo}{\color@fb@x {}{black}{}{green!40}{\leavevmode {\color  {green!40}o}}\ This is an inline comment.}{12}}
+\pgfsyspdfmark {pgfid7}{20055326}{13109930}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Tables and Figures}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces This is a figure caption.}}{13}}
+\newlabel{fig:frog}{{11}{13}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces An example table.}}{13}}
+\newlabel{tab:widgets}{{1}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Mathematics}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Lists}{14}}

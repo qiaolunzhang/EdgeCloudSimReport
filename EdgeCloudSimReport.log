@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018/W32TeX) (preloaded format=xelatex 2018.6.15)  15 FEB 2019 10:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.6.15)  23 FEB 2019 11:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -37,8 +37,7 @@ File: babel.def 2018/02/14 3.18 Babel common definitions
 \babel@savecnt=\count88
 \U@D=\dimen103
 
-(c:/texlive/2018/texmf-dist/tex/generic/babel/xebabel.def
-(c:/texlive/2018/texmf-dist/tex/generic/babel/txtbabel.def))
+(c:/texlive/2018/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@dirlevel=\count89
 )
 \l@canadian = a dialect from \language\l@american 
@@ -50,10 +49,21 @@ Package: inputenc 2018/04/06 v1.3b Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
 
+(c:/texlive/2018/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
+))
+(c:/texlive/2018/texmf-dist/tex/latex/ucs/ucs.sty
+Package: ucs 2013/05/11 v2.2 UCS: Unicode input support
 
-Package inputenc Warning: inputenc package ignored with utf8 based engines.
-
-) (c:/texlive/2018/texmf-dist/tex/latex/amsmath/amsmath.sty
+(c:/texlive/2018/texmf-dist/tex/latex/ucs/data/uni-global.def
+File: uni-global.def 2013/05/13 UCS: Unicode global data
+)
+\uc@secondtry=\count90
+\uc@combtoks=\toks16
+\uc@combtoksb=\toks17
+\uc@temptokena=\toks18
+)
+(c:/texlive/2018/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2017/09/02 v2.17a AMS math features
 \@mathmargin=\skip43
 
@@ -63,7 +73,7 @@ Package: amstext 2000/06/29 v2.01 AMS text
 
 (c:/texlive/2018/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks16
+\@emptytoks=\toks19
 \ex@=\dimen104
 ))
 (c:/texlive/2018/texmf-dist/tex/latex/amsmath/amsbsy.sty
@@ -73,13 +83,13 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 (c:/texlive/2018/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count90
+\inf@bad=\count91
 LaTeX Info: Redefining \frac on input line 213.
-\uproot@=\count91
-\leftroot@=\count92
+\uproot@=\count92
+\leftroot@=\count93
 LaTeX Info: Redefining \overline on input line 375.
-\classnum@=\count93
-\DOTSCASE@=\count94
+\classnum@=\count94
+\DOTSCASE@=\count95
 LaTeX Info: Redefining \ldots on input line 472.
 LaTeX Info: Redefining \dots on input line 475.
 LaTeX Info: Redefining \cdots on input line 596.
@@ -88,26 +98,26 @@ LaTeX Info: Redefining \cdots on input line 596.
 \big@size=\dimen106
 LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
-\macc@depth=\count95
-\c@MaxMatrixCols=\count96
+\macc@depth=\count96
+\c@MaxMatrixCols=\count97
 \dotsspace@=\muskip10
-\c@parentequation=\count97
-\dspbrk@lvl=\count98
-\tag@help=\toks17
-\row@=\count99
-\column@=\count100
-\maxfields@=\count101
-\andhelp@=\toks18
+\c@parentequation=\count98
+\dspbrk@lvl=\count99
+\tag@help=\toks20
+\row@=\count100
+\column@=\count101
+\maxfields@=\count102
+\andhelp@=\toks21
 \eqnshift@=\dimen107
 \alignsep@=\dimen108
 \tagshift@=\dimen109
 \tagwidth@=\dimen110
 \totwidth@=\dimen111
 \lineht@=\dimen112
-\@envbody=\toks19
+\@envbody=\toks22
 \multlinegap=\skip44
 \multlinetaggap=\skip45
-\mathdisplay@stack=\toks20
+\mathdisplay@stack=\toks23
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 )
@@ -116,7 +126,7 @@ Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
 (c:/texlive/2018/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks21
+\KV@toks@=\toks24
 )
 (c:/texlive/2018/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
@@ -127,10 +137,10 @@ Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 (c:/texlive/2018/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: xetex.def on input line 99.
+Package graphics Info: Driver file: pdftex.def on input line 99.
 
-(c:/texlive/2018/texmf-dist/tex/latex/graphics-def/xetex.def
-File: xetex.def 2017/06/24 v5.0h Graphics/color driver for xetex
+(c:/texlive/2018/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen113
 \Gin@req@width=\dimen114
@@ -147,10 +157,10 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 
 (c:/texlive/2018/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (c:/texlive/2018/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks22
-\XKV@tempa@toks=\toks23
+\XKV@toks=\toks25
+\XKV@tempa@toks=\toks26
 )
-\XKV@depth=\count102
+\XKV@depth=\count103
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 (c:/texlive/2018/texmf-dist/tex/latex/xcolor/xcolor.sty
@@ -159,8 +169,9 @@ Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 (c:/texlive/2018/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package xcolor Info: Driver file: xetex.def on input line 225.
+Package xcolor Info: Driver file: pdftex.def on input line 225.
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
 Package xcolor Info: Model `RGB' extended on input line 1364.
 Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
 Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
@@ -173,7 +184,7 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 (c:/texlive/2018/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
 (c:/texlive/2018/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
 (c:/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks24
+\pgfutil@everybye=\toks27
 \pgfutil@tempdima=\dimen115
 \pgfutil@tempdimb=\dimen116
 
@@ -195,11 +206,11 @@ Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
 Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
 
 (c:/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks25
-\pgfkeys@temptoks=\toks26
+\pgfkeys@pathtoks=\toks28
+\pgfkeys@temptoks=\toks29
 
 (c:/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
-\pgfkeys@tmptoks=\toks27
+\pgfkeys@tmptoks=\toks30
 ))
 \pgf@x=\dimen117
 \pgf@y=\dimen118
@@ -211,28 +222,23 @@ Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
 \pgf@yc=\dimen124
 \w@pgf@writea=\write3
 \r@pgf@reada=\read1
-\c@pgf@counta=\count103
-\c@pgf@countb=\count104
-\c@pgf@countc=\count105
-\c@pgf@countd=\count106
-\t@pgf@toka=\toks28
-\t@pgf@tokb=\toks29
-\t@pgf@tokc=\toks30
+\c@pgf@counta=\count104
+\c@pgf@countb=\count105
+\c@pgf@countc=\count106
+\c@pgf@countd=\count107
+\t@pgf@toka=\toks31
+\t@pgf@tokb=\toks32
+\t@pgf@tokc=\toks33
  (c:/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
 )
-Driver file for pgf: pgfsys-xetex.def
+Driver file for pgf: pgfsys-pdftex.def
 
-(c:/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-xetex.def
-File: pgfsys-xetex.def 2014/07/09  (rcs-revision 1.11)
-
-(c:/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-dvipdfmx.def
-File: pgfsys-dvipdfmx.def 2014/07/09  (rcs-revision 1.14)
+(c:/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2014/10/11  (rcs-revision 1.35)
 
 (c:/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
 File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
-)
-\pgfsys@objnum=\count107
 )))
 (c:/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
@@ -251,9 +257,9 @@ Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
 \pgfmath@dimen=\dimen125
 \pgfmath@count=\count110
 \pgfmath@box=\box29
-\pgfmath@toks=\toks31
-\pgfmath@stack@operand=\toks32
-\pgfmath@stack@operation=\toks33
+\pgfmath@toks=\toks34
+\pgfmath@stack@operand=\toks35
+\pgfmath@stack@operation=\toks36
 )
 (c:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
 (c:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.te
@@ -386,8 +392,8 @@ Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
 (c:/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
 \pgffor@iter=\dimen152
 \pgffor@skip=\dimen153
-\pgffor@stack=\toks34
-\pgffor@toks=\toks35
+\pgffor@stack=\toks37
+\pgffor@toks=\toks38
 ))
 (c:/texlive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
@@ -446,6 +452,27 @@ LaTeX Info: Redefining \addtolength on input line 81.
 
 LaTeX Warning: Label `fig:frog' multiply defined.
 
+
+LaTeX Warning: Label `fig:frog' multiply defined.
+
+
+LaTeX Warning: Label `fig:frog' multiply defined.
+
+
+LaTeX Warning: Label `fig:frog' multiply defined.
+
+
+LaTeX Warning: Label `fig:frog' multiply defined.
+
+
+LaTeX Warning: Label `fig:frog' multiply defined.
+
+
+LaTeX Warning: Label `fig:frog' multiply defined.
+
+
+LaTeX Warning: Label `fig:frog' multiply defined.
+
 )
 \openout1 = `EdgeCloudSimReport.aux'.
 
@@ -457,72 +484,249 @@ LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
 LaTeX Font Info:    ... okay on input line 41.
 LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
 LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
 LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
 LaTeX Font Info:    ... okay on input line 41.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
 LaTeX Font Info:    ... okay on input line 41.
- ABD: EveryShipout initializing macros
+ (c:/texlive/2018/texmf-dist/tex/latex/ucs/ucsencs.def
+File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
+)
+(c:/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count127
+\scratchdimen=\dimen163
+\scratchbox=\box39
+\nofMPsegments=\count128
+\nofMParguments=\count129
+\everyMPshowfont=\toks39
+\MPscratchCnt=\count130
+\MPscratchDim=\dimen164
+\MPnumerator=\count131
+\makeMPintoPDFobject=\count132
+\everyMPtoPDFconversion=\toks40
+) (c:/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(c:/texlive/2018/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
+(c:/texlive/2018/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/01/30 v0.27 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(c:/texlive/2018/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(c:/texlive/2018/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+ABD: EveryShipout initializing macros
+<heaplogo.pdf, id=4, 205.52647pt x 205.45259pt>
 File: heaplogo.pdf Graphic file (type pdf)
 <use heaplogo.pdf>
+Package pdftex.def Info: heaplogo.pdf  used on input line 97.
+(pdftex.def)             Requested size: 100.0pt x 99.96414pt.
  [1
 
+{c:/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./heaplogo.pdf>
 ]
-Overfull \hbox (31.77023pt too wide) in paragraph at lines 127--127
-[]\TU/lmr/bx/n/17.28 Relation between EdgeCloudSim and Cloudsim 
+Overfull \hbox (33.79771pt too wide) in paragraph at lines 127--127
+[]\OT1/cmr/bx/n/17.28 Relation be-tween Edge-CloudSim and Cloudsim 
  []
 
+
+
+pdfTeX warning: pdflatex.exe (file ./figures/2-updateCloudletProcessing.pdf): P
+DF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
+<./figures/2-updateCloudletProcessing.pdf, id=16, 505.93016pt x 154.18604pt>
 File: ./figures/2-updateCloudletProcessing.pdf Graphic file (type pdf)
 <use ./figures/2-updateCloudletProcessing.pdf>
+Package pdftex.def Info: ./figures/2-updateCloudletProcessing.pdf  used on inpu
+t line 136.
+(pdftex.def)             Requested size: 390.0pt x 118.86006pt.
 
-Overfull \hbox (18.79282pt too wide) in paragraph at lines 140--141
-\TU/lmr/m/n/12 tion updateCloudletProcessing, it will add a new VM_DATACENTER_E
-VENT
+Overfull \hbox (9.65451pt too wide) in paragraph at lines 140--141
+\OT1/cmr/m/n/12 tion up-date-Cloudlet-Pro-cess-ing, it will add a new VM[]DATAC
+ENTER[]EVENT
  []
 
 [1]
-File: ./figures/3-processingSequence.png Graphic file (type bmp)
-<./figures/3-processingSequence.png>
-File: ./figures/1-edgecloudsim_diagram.png Graphic file (type bmp)
-<./figures/1-edgecloudsim_diagram.png>
+<./figures/3-processingSequence.png, id=22, 653.44125pt x 483.0045pt>
+File: ./figures/3-processingSequence.png Graphic file (type png)
+<use ./figures/3-processingSequence.png>
+Package pdftex.def Info: ./figures/3-processingSequence.png  used on input line
+ 144.
+(pdftex.def)             Requested size: 390.0pt x 288.27196pt.
+<./figures/1-edgecloudsim_diagram.png, id=24, 349.305pt x 201.75375pt>
+File: ./figures/1-edgecloudsim_diagram.png Graphic file (type png)
+<use ./figures/1-edgecloudsim_diagram.png>
+Package pdftex.def Info: ./figures/1-edgecloudsim_diagram.png  used on input li
+ne 151.
+(pdftex.def)             Requested size: 390.0pt x 225.27306pt.
 
-Overfull \hbox (17.25203pt too wide) in paragraph at lines 160--161
-\TU/lmr/m/n/12 SimEntity class and it is related to CREATE_TASK, CHECK_ALL_VM,
+Overfull \hbox (2.91374pt too wide) in paragraph at lines 160--161
+\OT1/cmr/m/n/12 Si-mEn-tity class and it is re-lated to CRE-ATE[]TASK, CHECK[]A
+LL[]VM,
+ []
+
+[2 <./figures/2-updateCloudletProcessing.pdf>] [3 <./figures/3-processingSequen
+ce.png>]
+Overfull \hbox (0.68846pt too wide) in paragraph at lines 164--165
+[]\OT1/cmr/m/n/12 edge[]client: Mo-bileDe-vice-M-an-ager.java ex-tends Dat-a-ce
+n-ter-Bro-ker class
  []
 
 
-Overfull \hbox (12.56403pt too wide) in paragraph at lines 160--161
-\TU/lmr/m/n/12 GET_LOAD_LOG, PRINT_PROGRESS, STOP_SIMULATION. Sim-
+Overfull \hbox (184.61758pt too wide) in paragraph at lines 164--165
+\OT1/cmr/m/n/12 new events: RE-QUEST[]RECEIVED[]BY[]CLOUD, RE-QUEST[]RECEIVED[]
+BY[]EDGE[]EDGE[]DEVICES. 
  []
 
-[2] [3]
-Overfull \hbox (5.93202pt too wide) in paragraph at lines 164--165
-[]\TU/lmr/m/n/12 edge_client: MobileDeviceManager.java extends DatacenterBroker
- class
+[4 <./figures/1-edgecloudsim_diagram.png>]
+<./figures/Generate-task-LoadGenerator.png, id=39, 817.8555pt x 250.536pt>
+File: ./figures/Generate-task-LoadGenerator.png Graphic file (type png)
+<use ./figures/Generate-task-LoadGenerator.png>
+Package pdftex.def Info: ./figures/Generate-task-LoadGenerator.png  used on inp
+ut line 201.
+(pdftex.def)             Requested size: 390.0pt x 119.46838pt.
+<./figures/schedule-submitTask.png, id=40, 825.68475pt x 330.033pt>
+File: ./figures/schedule-submitTask.png Graphic file (type png)
+<use ./figures/schedule-submitTask.png>
+Package pdftex.def Info: ./figures/schedule-submitTask.png  used on input line 
+208.
+(pdftex.def)             Requested size: 390.0pt x 155.89105pt.
+<./figures/5-SimManager-ProcessEvent-CREAT_TASK.png, id=41, 604.05675pt x 295.7
+0474pt>
+File: ./figures/5-SimManager-ProcessEvent-CREAT_TASK.png Graphic file (type png
+)
+<use ./figures/5-SimManager-ProcessEvent-CREAT_TASK.png>
+Package pdftex.def Info: ./figures/5-SimManager-ProcessEvent-CREAT_TASK.png  us
+ed on input line 216.
+(pdftex.def)             Requested size: 390.0pt x 190.92436pt.
+<./figures/4-submitTask-SampleMobileDeviceManager.png, id=42, 591.4095pt x 345.
+08925pt>
+File: ./figures/4-submitTask-SampleMobileDeviceManager.png Graphic file (type p
+ng)
+<use ./figures/4-submitTask-SampleMobileDeviceManager.png>
+Package pdftex.def Info: ./figures/4-submitTask-SampleMobileDeviceManager.png  
+used on input line 223.
+(pdftex.def)             Requested size: 390.0pt x 227.56477pt.
+ [5] [6 <./figures/Generate-task-LoadGenerator.png> <./figures/schedule-submitT
+ask.png>]
+<./figures/processCloudletReturn.png, id=52, 593.8185pt x 441.44925pt>
+File: ./figures/processCloudletReturn.png Graphic file (type png)
+<use ./figures/processCloudletReturn.png>
+Package pdftex.def Info: ./figures/processCloudletReturn.png  used on input lin
+e 230.
+(pdftex.def)             Requested size: 390.0pt x 289.92937pt.
+ [7 <./figures/5-SimManager-ProcessEvent-CREAT_TASK.png>] [8 <./figures/4-submi
+tTask-SampleMobileDeviceManager.png>] [9 <./figures/processCloudletReturn.png>]
+<./figures/task-based-xml.png, id=65, 578.16pt x 431.211pt>
+File: ./figures/task-based-xml.png Graphic file (type png)
+<use ./figures/task-based-xml.png>
+Package pdftex.def Info: ./figures/task-based-xml.png  used on input line 255.
+(pdftex.def)             Requested size: 390.0pt x 290.87064pt.
+<./figures/atomic-application-xml.png, id=66, 471.56175pt x 195.73125pt>
+File: ./figures/atomic-application-xml.png Graphic file (type png)
+<use ./figures/atomic-application-xml.png>
+Package pdftex.def Info: ./figures/atomic-application-xml.png  used on input li
+ne 261.
+(pdftex.def)             Requested size: 390.0pt x 161.88644pt.
+
+Overfull \hbox (35.71466pt too wide) in paragraph at lines 265--266
+[]\OT1/cmr/m/n/12 The pa-ram-e-ters are loaded in Sim-Set-tings.java. A new cla
+ss called TaskBasedAp-
  []
 
 
-Overfull \hbox (221.83203pt too wide) in paragraph at lines 164--165
-\TU/lmr/m/n/12 new events: REQUEST_RECEIVED_BY_CLOUD, REQUEST_RECEIVED_BY_EDGE_
-EDGE_DEVICES. 
+Overfull \hbox (0.5404pt too wide) in paragraph at lines 270--271
+[]\OT1/cmr/m/n/12 private TaskBasedAp-pli-ca-tion[] de-pen-den-cy-LookUpT-able:
+ store the de-
  []
 
-[4] [5] [6]
-File: frog.jpg Graphic file (type bmp)
-<frog.jpg>
- [7] [8] (./EdgeCloudSimReport.aux)
+[10] [11 <./figures/task-based-xml.png> <./figures/atomic-application-xml.png>]
+[12]
+<frog.jpg, id=80, 748.7975pt x 741.77126pt>
+File: frog.jpg Graphic file (type jpg)
+<use frog.jpg>
+Package pdftex.def Info: frog.jpg  used on input line 318.
+(pdftex.def)             Requested size: 195.0pt x 193.1729pt.
+ [13 <./frog.jpg>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 349.
+
+ (c:/texlive/2018/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 349.
+
+[14] (./EdgeCloudSimReport.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 12358 strings out of 492970
- 247157 string characters out of 6137298
- 301785 words of memory out of 5000000
- 16112 multiletter control sequences out of 15000+600000
- 8324 words of font info for 47 fonts, out of 8000000 for 9000
- 1348 hyphenation exceptions out of 8191
- 62i,8n,80p,994b,706s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 13391 strings out of 492649
+ 264421 string characters out of 6133384
+ 321847 words of memory out of 5000000
+ 16979 multiletter control sequences out of 15000+600000
+ 12172 words of font info for 43 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 62i,9n,80p,939b,706s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
+live/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2018
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2018/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2018/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2018/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi8.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+12.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/
+texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2
+018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on EdgeCloudSimReport.pdf (15 pages, 789967 bytes).
+PDF statistics:
+ 127 PDF objects out of 1000 (max. 8388607)
+ 75 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 73 words of extra memory for PDF output out of 10000 (max. 10000000)
 
-Output written on EdgeCloudSimReport.pdf (9 pages).
