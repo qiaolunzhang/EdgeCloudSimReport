@@ -271,12 +271,28 @@ The parameters are loaded in SimSettings.java. A new class called TaskBasedAppli
 \end{enumerate}
 
 
+
 \subsubsection{Sub-task Submission Using Topological Order}
-In this project, a class called TaskBasedTask.java is implemented to store the information of task-based task. This class can store the dependencies between each sub-tasks. We can trigger a function in the class to record the tasks that have finished. Moreover, it can calculate the sub-tasks that can be executed at this time.
+In the class LoadGenerator, we generate the list properties of all tasks including all the sub tasks. The dependencies between all the sub-tasks are maintained in a list of objects of TaskBasedTask.java. The dependencies of them are maintained in this class. The reference of the LoadGenerator instance will be added to the instance of MobileDeviceManager. When MobileDeviceManager knows some tasks ends. It will check whether the task is a sub-task. If it is a sub-task. Then it will check whether there are other sub-tasks can be executed after the ending of this sub-task. If there are such tasks, the tasks will be send to datacenter using the function schedule.
 
-The dependencies of sub-task in task-based applications are handled in class TaskBasedapplication. This class can check the status of each task using two private variables called submitted and dependency. Variable submitted checks whether the sub-task can be 
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/y-1generator.png}
+	\caption{\label{fig:frog}exponential number generator for sub-task.}
+\end{figure}
 
-Distinguish betwee tasks and applications. 
+
+The following picture shows how this project generate task properties for atomic task and bask-based task. After generating the random task type for edge devices, we judge whether it is a task-based task. If it is a task-based task, we will generate the properties of these sub-tasks.
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/y-2generator.png}
+	\caption{\label{fig:frog}Generate task properties for atomic task and task-based task.}
+\end{figure}
+
+The dependencies of sub-task in task-based applications are handled in class TaskBasedApplication. This class can check the status of each task using two private variables called submitted and dependency. 
+
+In this project, a class called TaskBasedTask.java is implemented to store the information of task-based task. This class can store the dependencies between each sub-tasks. We can trigger a function in the class to record the tasks that have finished. Moreover, it can calculate the sub-tasks that can be executed at this time. The object of TaskBasedTask will utilize the information stored in TaskBasedApplication to generate the dependencies of sub-tasks.
+
 
 \subsubsection{Scheduling Algorithm in EdgeCloudSim}
 Which module can we modify to achieve task-based application?
