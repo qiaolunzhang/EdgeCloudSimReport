@@ -106,31 +106,56 @@ Michele \textsc{Zanella} % Supervisor's Name
 
 
 \begin{abstract}
-The simulation tool EdgeCloudSim provides some basic features of simulating edge computing scenarios. But it lacks some further features. This project extends basic task application definition to support task-based application.
+The simulation tool EdgeCloudSim provides environment to simulate edge computing scenarios, which can be used to conduct experiments that considers both computational and networking resources. However, the application allocated and scheduled in the system is atomic, which means the application cannot be divided and can only be allocated in one devices. But seperating the application into multiple kernels and distributing them to edge servers in the vicinity really counts because edge server is usually resource limited and may not capable to execute the application. In this project, the atomic application simulation in EdgeCloudSim is extended into thread-based application, which provides a more realistic simulation of computation and networking in edge computing.
 \end{abstract}
 
 \section{Introduction}
 
-EdgeCloudSim is a simulation tool which can simulate Edge Computing scenarios. But this tool can not simulate task-based application. The project adds the following features to the simulation tool:
+Edge Computing is a new ocmputing paradigm which utilize the resoruces near collabrates with cloud computing to provide better services to the user. EdgeCloudSim is a simulation tool which can simulate edge computing and cloud computing scenarios which combine Edge Computing and Cloud Computing. EdgeCloudSim. EdgeCloudSim is extended from CloudSim and uses the discrete event management framework to simulate the dispatching and scheduling of applications. 
 
-\begin{enumerate}
-	\item Extend basic task application definition to support task-based application
-	\item Task migration among the Edge or Cloud VMs
-	\item Add probabilistic network failure model by considering the congestion or other parameters such as the distance between mobile device and the WiFi access point.
-	\item Visual tool for displaying the network topology
-\end{enumerate}
+The core simulation process is a loop function which checks the events related to all the entities and processes the event. Each entities can process different kinds of events. Figure 1 shows the relations between the EdgeCloudSim modules. The SimSettings class in core simulation modules will load and store all the simulation settings information, which includes the application parameters, the edge server settings, the simulation environment settings. The load generator module will utilize the information in SimSettings instance to generate applications that will be scheduled. When generating applications, mobility module will be utilized to generate the position of each application. Then the simulation of edge computing scenarios starts and the program will loop a clock click cycle. At each clock cycle, the simulation will check whether there are some applications starts at that time. If it is, edge orchestrator module will utilize the specified allocation strategy to calculate the virtual machine in a server to execute the application. Then MobileDeviceManager class will utilize the calculated information in edge orchestrator module to submit the application to CloudSim (Base).
+
+\section{Problem Statement}
+In EdgeCloudSim, the application is atomic and can only be executed in one edge devices. However, some applications can be divided into multiple kernels and simulate the execution of these kernels really counts. Since single edge sever is resources-limited and may not have enough resoruces to execute the application. But executing the application in the cloud may lead to time-delay and even miss the deadline of the application.  Consequently, application is divided into multiple small kernels, which are distributed into multiple edge server. So it is necessary to provide kernel-based application feature to simulate edge computing scenarios.
 
 
-In the end, this project gives a detailed simulation and provides the simulation results.
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/1-edgecloudsim_diagram.png}
+	\caption{\label{fig:frog}This is a figure caption.}
+\end{figure}
+
+
+\section{Design and Implementation}
+
+\subsection{Kernel-Based Application Design}
+In EdgeCloudSim, task is atomic and cannot be divided into smaller tasks. Task-based application is an application which is composed by several smaller tasks. We can define how to divide applications in XML file and store their dependencies.
+
+
+\subsection{Allocation of Kernel-Based Application}
+
+
+\subsection{Mapping between Kernel-Based Application and it's kernel}
+
+
+\subsection{Classes Implementation}
+
+
+\subsection{Simulation Workflow}
 
 
 \section{Relation between EdgeCloudSim and Cloudsim}
 
 \subsection{Simulation Framework of CloudSim}
 \subsubsection{Simulation Data Flow}
-CloudSim is a discrete event management framework. The core simulation process is a loop function which checks the events related to all the entities and processes the event. Each entities can process different kinds of events. So figuring out all the 
 
-\subsubsection{Data center internal processing}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/3-processingSequence.png}
+	\caption{\label{fig:processingSequence}Cloudlet processing update process.}
+\end{figure}
+
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{./figures/2-updateCloudletProcessing.pdf}
@@ -139,21 +164,8 @@ CloudSim is a discrete event management framework. The core simulation process i
 
 Figure 1 shows the call hierarchy of member function updateCloudletProcessing in class DataCenter. From this figure, we can figure out that the Cloudlet processing update process figure in the paper about CloudSim is wrong. Figure 2 is the fixed Cloudlet processing update process. At the end of the function updateCloudletProcessing, it will add a new VM\_DATACENTER\_EVENT to the future queue using function schedule. When we go back to the loop of Run function, the updateCloudletProcessing function will be triggered again.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./figures/3-processingSequence.png}
-	\caption{\label{fig:processingSequence}Cloudlet processing update process.}
-\end{figure}
+Figure1 shows the Cloudlet processing unit in CloudSim. As is shown in the picture1, there are two important classes in core package: ScenarioFactory and SimManager. The ScenarioFactory gets the parameters for the scenarios. And the SimManager receives the object of type ScenarioFactory. Moreover, the SimManager is a class extended from SimEntity class. The SimEntity is a class defined in CloudSim. And it has a function called startEntity(), which will schedule the task. 
 
-\subsection{Simulation Framework of EdgeCloudSim}
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./figures/1-edgecloudsim_diagram.png}
-	\caption{\label{fig:frog}This is a figure caption.}
-\end{figure}
-
-As is shown in the picture1, there are two important classes in core package: ScenarioFactory and SimManager. The ScenarioFactory gets the parameters for the scenarios. And the SimManager receives the object of type ScenarioFactory. Moreover, the SimManager is a class extended from SimEntity class. The SimEntity is a class defined in CloudSim. And it has a function called startEntity(), which will schedule the task. 
-\todo[inline, color=green!40]{Not sure if I can implement the task-based application here or change the schedule function in CloudSim}
 
 \subsection{Modules in EdgeCloudsim}
 \begin{enumerate}
@@ -186,11 +198,9 @@ MobileDeviceManager class extends DatacenterBroker class. So it implemented the 
 \subsection{Task-based Application Design and Implementation}
 
 \subsubsection{Task Lifecycle}
-In EdgeCloudSim, task is atomic and cannot be divided into smaller tasks. Task-based application is an application which is composed by several smaller tasks. There may also have dependencies among these tasks. For instance, one sub-task can only starts after another sub-task. 
 
-There are two ways to implemented tasked-based application feature in EdgeCloudSim. The first one is to change the code of CloudSim and add task-based features. The second one is to change the code of EdgeCloudSim and add the feature of tasked-based application.
 
-We can define how to divide applications in XML file and store their dependencies.
+
 
 The process of submit a task is as follows.
 
@@ -294,9 +304,24 @@ The dependencies of sub-task in task-based applications are handled in class Tas
 In this project, a class called TaskBasedTask.java is implemented to store the information of task-based task. This class can store the dependencies between each sub-tasks. We can trigger a function in the class to record the tasks that have finished. Moreover, it can calculate the sub-tasks that can be executed at this time. The object of TaskBasedTask will utilize the information stored in TaskBasedApplication to generate the dependencies of sub-tasks.
 
 
-\subsubsection{Scheduling Algorithm in EdgeCloudSim}
-Which module can we modify to achieve task-based application?
-How to deal with task-dependency graph
+Now I think add a new class TaskBasedTask.java with static variables. Each object can acccess the static instance in this class. This class can be used to log the status of all the task-based applications.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/IdleActiveLoadGenerator-TaskBasedTask.png}
+	\caption{\label{fig:frog}Initialize TaskBasedTaskStatus in IdleActiveLoadGenerator.}
+\end{figure}
+
+The class TaskBasedTaskStatus.java and the class TaskBasedTask.java are fully tested using a test Java file. Moreover, in debug mode, the TaskBasedTaskStatus instance is as follows.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./figures/TaskBasedTaskStatus-1.png}
+	\caption{\label{fig:frog}TaskBasedTaskStatus in Debug Mode.}
+\end{figure}
+
+\subsubsection{New Task Submission}
+Since in EdgeCloudSim, when we submit a task, the task will be scheduled. So when it comes to task-based task, the  sub-task can only be submitted after its dependencies  have been met. So when each sub-task finishes, the tasks that belong to the same task-based application with it will be checked. When a task finishes in EdgeCloudSim will execute the processCloudReturn function in MobileDeviceManager class. Actually, CloudSim will execute the processCloudReturn function in Broker. But the MobileDeviceManager cannot access the variables in object LoadGeneratorModel. But the the event of submitting new tasks can be done by sending  an event to SimManager. In the  meantime, the sub-task need to be set as submitted. In the class SimManager, a new label called CREATE\_SUB\_TASK is added. And the event is handled in the function processEvent in SimManager. Since we need to submit the new sub-tasks immediately, we use scheduleNow function to send the event of creating new sub-tasks in the system.
 
 \subsubsection{Component Diagram of the Simulation tool}
 After adding the feature, the component diagram has changed.
@@ -310,6 +335,8 @@ In this section, we did some experiment. We test the failure rate.
 
 \section{Conclusions}
 
+
+\section{Future Works}
 
 \section{Some \LaTeX{} Examples}
 \label{sec:examples}
