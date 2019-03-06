@@ -129,7 +129,9 @@ In EdgeCloudSim, the application is atomic and can only be executed in one edge 
 \section{Design and Implementation}
 
 \subsection{Kernel-Based Application Design}
-In EdgeCloudSim, task is atomic and cannot be divided into smaller tasks. Task-based application is an application which is composed by several smaller tasks. We can define how to divide applications in XML file and store their dependencies.
+In EdgeCloudSim, application is atomic and cannot be divided into smaller kernels. In this project, kenel-based application is introduced into this simulation tool. Kernel-based application is composed of a single kernel or multiple kernels. And the kernel is distinguised by kernelId in this implementation. 
+Ma
+We can define how to divide applications in XML file and store their dependencies.
 
 
 \subsection{Allocation of Kernel-Based Application}
@@ -140,8 +142,28 @@ In EdgeCloudSim, task is atomic and cannot be divided into smaller tasks. Task-b
 
 \subsection{Classes Implementation}
 
+\subsubsection{SimLogger.java and LogItem.java}
+
+
 
 \subsection{Simulation Workflow}
+The simulation works in the following steps. First SimManager will use the class SimSettings to load the settings about the application types, edge server, and some other parameters. 
+
+The generation of applications are in two phase. In the first phase, SimManager will utilize LoadGenerator to generate the applications that will be scheduled in the simulation. In this process, LoadGenerator will use Possion process to get the arrival time of each applications and use the parameters in SimSettings to generate the positions of each applicaion. Then comes to the second phase, it's a loop to submit the kernels in the application to be scheduled. The loop ends when the simulation comes to the end of the simulation time. In each loop, SimManager
+
+\begin{enumerate}
+	\item lead the settings
+	\item 
+	\item edge\_server: class EdgeServerManager.java has similar functions as CloudServer.
+	\item mobile\_processing: class MobileServerManager.java. This class enables the mobile devices have the ability to process task. We can also create data centers and virtual machines on it.
+	\item edge\_client: MobileDeviceManager.java extends DatacenterBroker class in CloudSim. And it overwrite the processOtherEvent function and add new events: REQUEST\_RECEIVED\_BY\_CLOUD, REQUEST\_RECEIVED\_BY\_EDGE\_EDGE\_DEVICES.
+\end{enumerate}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{./UML/sequence-diagram-create-kernel.png}
+	\caption{\label{fig:create-kernel}Modules and functions related to create and submit kernel.}
+\end{figure}
 
 
 \section{Relation between EdgeCloudSim and Cloudsim}
