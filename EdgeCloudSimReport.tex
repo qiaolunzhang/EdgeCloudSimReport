@@ -37,6 +37,34 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{diagbox}
+\usepackage{array}
+\usepackage{color}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=Java,
+	basicstyle=\small,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=fullflexible,
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	postbreak=\raisebox{0ex}[0ex][0ex]{\color{red}$\hookrightarrow$\space},
+	breakatwhitespace=true,
+	tabsize=3
+}
 
 \begin{document}
 
@@ -111,95 +139,51 @@ The simulation tool EdgeCloudSim provides environment to simulate edge computing
 
 \section{Introduction}
 
-Edge Computing is a new ocmputing paradigm which utilize the resoruces near collabrates with cloud computing to provide better services to the user. EdgeCloudSim is a simulation tool which can simulate edge computing and cloud computing scenarios which combine Edge Computing and Cloud Computing. EdgeCloudSim. EdgeCloudSim is extended from CloudSim and uses the discrete event management framework to simulate the dispatching and scheduling of applications. 
+Edge Computing is a new computing paradigm which utilize the resources near the data source and collabrates with cloud computing to provide better services to the user. EdgeCloudSim is a simulation tool which can simulate edge computing and cloud computing scenarios which combine Edge Computing and Cloud Computing. EdgeCloudSim. EdgeCloudSim is extended from CloudSim and uses the discrete event management framework to simulate the dispatching and scheduling of applications. 
 
-The core simulation process is a loop function which checks the events related to all the entities and processes the event. Each entities can process different kinds of events. Figure 1 shows the relations between the EdgeCloudSim modules. The SimSettings class in core simulation modules will load and store all the simulation settings information, which includes the application parameters, the edge server settings, the simulation environment settings. The load generator module will utilize the information in SimSettings instance to generate applications that will be scheduled. When generating applications, mobility module will be utilized to generate the position of each application. Then the simulation of edge computing scenarios starts and the program will loop a clock click cycle. At each clock cycle, the simulation will check whether there are some applications starts at that time. If it is, edge orchestrator module will utilize the specified allocation strategy to calculate the virtual machine in a server to execute the application. Then MobileDeviceManager class will utilize the calculated information in edge orchestrator module to submit the application to CloudSim (Base).
 
-\section{Problem Statement}
-In EdgeCloudSim, the application is atomic and can only be executed in one edge devices. However, some applications can be divided into multiple kernels and simulate the execution of these kernels really counts. Since single edge sever is resources-limited and may not have enough resoruces to execute the application. But executing the application in the cloud may lead to time-delay and even miss the deadline of the application.  Consequently, application is divided into multiple small kernels, which are distributed into multiple edge server. So it is necessary to provide kernel-based application feature to simulate edge computing scenarios.
+The core simulation process is a loop function which checks the events related to all the entities and processes the event. Each entities can process different kinds of events. Figure 1 shows the relations between the EdgeCloudSim modules. The SimSettings class in core simulation modules will load and store all the simulation settings information, which includes the application parameters, the edge server settings, the simulation environment settings. The load generator module will utilize the information in SimSettings instance to generate applications that will be scheduled. Mobility module generates the position of each application when generating applications. Then the simulation of edge computing scenarios starts and the program will goes into a loop. At each cycle, the simulation will check whether there are some events starts at that time. MobileDeviceManager will check if there are new applications that need to be submitted at that time. The sttart time of each application is defined in load generator module before. If there is new applications that need to be submitted, edge orchestrator module will utilize the specified allocation strategy to calculate the virtual machine in a server to execute the application. Then MobileDeviceManager class will utilize the calculated information in edge orchestrator module to submit the application to CloudSim (Base). The entity related to scheduling applications in the virtual machines is defined in CloudSim.
 
 
 \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{./figures/1-edgecloudsim_diagram.png}
-	\caption{\label{fig:frog}This is a figure caption.}
+	\caption{\label{fig:module}Module relationship between modules in EdgeCloudSim.}
 \end{figure}
+
+
+\section{Problem Statement}
+In EdgeCloudSim, the application is atomic and can only be executed in one edge devices. However, some applications can be divided into multiple kernels and simulate the execution of these kernels really counts. Since single edge sever is resources-limited and may not have enough resoruces to execute the application. But executing the application in the cloud may lead to time-delay and even miss the deadline of the application.  Consequently, application is divided into multiple small kernels, which are distributed into multiple edge server. So it is necessary to provide kernel-based application feature to simulate edge computing scenarios. The modules that need to be modified or added are listed as follows:
+
+\begin{enumerate}
+	\item core: change the core classes related to load settings, managing events in the system and store status of kernel-based applications. This module also defines a KernelBasedAppliationStatus.java class to store the status of all the applications.
+	\item edge\_clinet: define the classes for kernel.
+	\item mobility: change the mobility module to adapte to generate the positions for kernel-based applications.
+	\item task\_generator: generate kerne\_based applications
+	\item utils: define the classes related to kernel-based applications. Moreover, SimLogger.java are modified to calculate the simulation results for kernel-based applications.
+	\item config: the config file applications.xml are redifned for kernel-based applications.
+\end{enumerate}
 
 
 \section{Design and Implementation}
 
 \subsection{Kernel-Based Application Design}
-In EdgeCloudSim, application is atomic and cannot be divided into smaller kernels. In this project, kenel-based application is introduced into this simulation tool. Kernel-based application is composed of a single kernel or multiple kernels. And the kernel is distinguised by kernelId in this implementation. 
-Ma
-We can define how to divide applications in XML file and store their dependencies.
-
-
-\subsection{Allocation of Kernel-Based Application}
-
-
-\subsection{Mapping between Kernel-Based Application and it's kernel}
-
-
-\subsection{Classes Implementation}
-
-\subsubsection{SimLogger.java and LogItem.java}
-
-
-
-\subsection{Simulation Workflow}
-The simulation works in the following steps. First SimManager will use the class SimSettings to load the settings about the application types, edge server, and some other parameters. 
-
-The generation of applications are in two phase. In the first phase, SimManager will utilize LoadGenerator to generate the applications that will be scheduled in the simulation. In this process, LoadGenerator will use Possion process to get the arrival time of each applications and use the parameters in SimSettings to generate the positions of each applicaion. Then comes to the second phase, it's a loop to submit the kernels in the application to be scheduled. The loop ends when the simulation comes to the end of the simulation time. In each loop, SimManager
+In EdgeCloudSim, application is atomic and cannot be divided into smaller kernels. In this project, kenel-based application is introduced into this simulation tool. Kernel-based application is composed of a single kernel or multiple kernels. And the kernel is distinguised by kernel ID in this implementation. The original application.xml file are modified to represent the parameters for kernel-based application. The Applications.xml describes the types and parameters of applications in the simulation. Parameters in the original Applications.xml file of EdgeCloudSim is not explained, which makes it difficult to understand the meaning of these parameters.  The meanings of the some important parameters are listed as follows:
 
 \begin{enumerate}
-	\item lead the settings
-	\item 
-	\item edge\_server: class EdgeServerManager.java has similar functions as CloudServer.
-	\item mobile\_processing: class MobileServerManager.java. This class enables the mobile devices have the ability to process task. We can also create data centers and virtual machines on it.
-	\item edge\_client: MobileDeviceManager.java extends DatacenterBroker class in CloudSim. And it overwrite the processOtherEvent function and add new events: REQUEST\_RECEIVED\_BY\_CLOUD, REQUEST\_RECEIVED\_BY\_EDGE\_EDGE\_DEVICES.
+	\item usage\_percentage: The usage percentage here is used to decide the percentage of this type of application in all of the applications generated. So add up usage\_percentage field in the applications.xml, we can get 100 because we have sumed up all the percentages of all applications.
+	\item prob\_cloud\_selection: The probability that we choose the cloud to execute the applications.
+	\item active\_period: In active period, the edge devices can generate new applications.
+	\item idle\_period: In idle period, the edge devices can not generate new applications.
 \end{enumerate}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./UML/sequence-diagram-create-kernel.png}
-	\caption{\label{fig:create-kernel}Modules and functions related to create and submit kernel.}
-\end{figure}
+A sample of new application.xml shows as follows:
+\lstinputlisting{./code/Applications.xml}
 
 
-\section{Relation between EdgeCloudSim and Cloudsim}
+The implementation of kernel-based application in EdgeCloudSim is developed by the abstraction of kernels. The original atomic task in EdgeCloudSim are changed to a kernel. An application can have one or multiple kernel. The kernel id is unique in this simulation tool. When an kernel-based application that have multiple kernels is created, an KernelBasedApplication.java class is instanciated and stores the kernel id of all the kernels that belongs to it. Moreover, this class handles the dependencies between the kernels in this application in runtime. All the instance of KernelBasedApplication is stored in a singleton instance of KernelBasedApplicationStatus.java. When we want to query or change the states of kernel-based application, we use the function in the singleton instance of KernelBasedApplicationStatus.java.
 
-\subsection{Simulation Framework of CloudSim}
-\subsubsection{Simulation Data Flow}
-
-
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./figures/3-processingSequence.png}
-	\caption{\label{fig:processingSequence}Cloudlet processing update process.}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./figures/2-updateCloudletProcessing.pdf}
-	\caption{\label{fig:cloudletProcessing}Call hierarchy of function updateCloudletProcessing.}
-\end{figure}
-
-Figure 1 shows the call hierarchy of member function updateCloudletProcessing in class DataCenter. From this figure, we can figure out that the Cloudlet processing update process figure in the paper about CloudSim is wrong. Figure 2 is the fixed Cloudlet processing update process. At the end of the function updateCloudletProcessing, it will add a new VM\_DATACENTER\_EVENT to the future queue using function schedule. When we go back to the loop of Run function, the updateCloudletProcessing function will be triggered again.
-
-Figure1 shows the Cloudlet processing unit in CloudSim. As is shown in the picture1, there are two important classes in core package: ScenarioFactory and SimManager. The ScenarioFactory gets the parameters for the scenarios. And the SimManager receives the object of type ScenarioFactory. Moreover, the SimManager is a class extended from SimEntity class. The SimEntity is a class defined in CloudSim. And it has a function called startEntity(), which will schedule the task. 
-
-
-\subsection{Modules in EdgeCloudsim}
-\begin{enumerate}
-	\item core: three are there important class in this module. ScenarioFactory.java is the class for factory scheme. SimManager.java class extends SimEntity class and it is related to CREATE\_TASK, CHECK\_ALL\_VM, GET\_LOAD\_LOG, PRINT\_PROGRESS, STOP\_SIMULATION. SimSettings.java is the class that stores all the configurations.
-	\item cloud\_server: class CloudServerManager.java. This class actually just generate the hostlist, vmlist, local data center, and function to get the average utilization of all VMS. 
-	\item edge\_server: class EdgeServerManager.java has similar functions as CloudServer.
-	\item mobile\_processing: class MobileServerManager.java. This class enables the mobile devices have the ability to process task. We can also create data centers and virtual machines on it.
-	\item edge\_client: MobileDeviceManager.java extends DatacenterBroker class in CloudSim. And it overwrite the processOtherEvent function and add new events: REQUEST\_RECEIVED\_BY\_CLOUD, REQUEST\_RECEIVED\_BY\_EDGE\_EDGE\_DEVICES.
-\end{enumerate}
-
-
-\subsection{Entities in EdgeCloudsim}
+Adding the events of submitting kernels in runtime is required because we choose only submit a kernel to virtual machine when its dependencies has been met. This requirement is implemented using the event-driven simulation mechanism in CloudSim. In the CloudSim, so  When a Cloudlet(kernel) is finished, it will send a CLOUDLET\_RETURN event to DatacenterBroker. In EdgeCloudSim, this event will be sent to MobileDeviceManager. Then processCloudletReturn function will be triggered. So when a kernel is finished, the kernels belongs to the same kernel-based applications will be checked. If there are kernels whose dependencies has been met now, it will be submitted to the VM at this time. The submit of kernel are based on the schedule function. We implement these functions in MobileDeviceManager class. What the scheduling function does is actually creating events for the entities. The entities in EdgeCloudsim are listed as follows:
 \begin{enumerate}
 	\item SimManager: public class SimManager extends SimEntity
 	\item MobileDeviceManager: public abstract class MobileDeviceManager  extends DatacenterBroker
@@ -207,150 +191,110 @@ Figure1 shows the Cloudlet processing unit in CloudSim. As is shown in the pictu
 \end{enumerate}
 
 
-\subsection{Relationship of Modules between CloudSim and EdgeCloudSim}
-Because EdgeCloudSim is implemented on the top of CloudSim, it also relies on the discrete event management framework. 
-MobileDeviceManager class extends DatacenterBroker class. So it implemented the following functions
-
-
-\section{Design and Implementation}
-
-\subsection{Scheduling in EdgeCloudSim}
-
-
-\subsection{Task-based Application Design and Implementation}
-
-\subsubsection{Task Lifecycle}
-
-
-
-
-The process of submit a task is as follows.
-
-
-Figure 4 shows how generate the task list in LoadGenerator class.
 \begin{figure}
 	\centering
-	\includegraphics[width=1\textwidth]{./figures/Generate-task-LoadGenerator.png}
-	\caption{\label{fig:frog}Generating Task List in LoadGenerator class.}
+	\includegraphics[width=1\textwidth]{./figures/2-updateCloudletProcessing.pdf}
+	\caption{\label{fig:cloudletProcessing}Call hierarchy of function updateCloudletProcessing.}
 \end{figure}
 
-Figure 5 shows how we submit the task using the schedule function.
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./figures/schedule-submitTask.png}
-	\caption{\label{fig:frog}Submit The Task Using the Schedule Function.}
-\end{figure}
+Although we can access the kernel ID of kernels that needs to be submitted, the MobileDeviceManager cannot have access to the load generator. So send an event of submitting these kernels to SimManager. The following code shows the process that sends the event to SimManager in MobileDeviceManager.
+\lstinputlisting{./code/processCloudletReturn.txt}
+
+The  following code shows how the kernels is submitted in SimManager. Since the kernel needs to be allocated to specific virtual machines in a chosen host in runtime, the kernel is instanciated at this time. First we will retrieve KernelProperty instance related to this kernel, then pass it into the function submitKernel in class MobileDeviceManager. Actually now goes back to MobileDeviceManager instance.
+\lstinputlisting{./code/createKernelInSimManager.txt}
+
+The following code shows a small part of the submitKernel function in MobileDeviceManager.
+\lstinputlisting{./code/submitKernel.txt}
 
 
-Figure 6 shows when we come to the clock tick in EdgeCloudSim, the event will be processed.
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./figures/5-SimManager-ProcessEvent-CREAT_TASK.png}
-	\caption{\label{fig:frog}CREATE\_TASK event in in SimManager class.}
-\end{figure}
-
-Figure 7 shows the submitTask function in class MobileDeviceManager. MobileDeviceManager is extended from Broker. We can notice that the task created is added to log list in this class. The task is distinguished from other tasks by its CloudletId. 
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./figures/4-submitTask-SampleMobileDeviceManager.png}
-	\caption{\label{fig:frog}Task Submitted to the CloudSim Base in SampleMobileDeviceManager.java class.}
-\end{figure}
-
-Figure 8 what we do when the task finished. EdgeCloudSim will change the parameters concerning with execution time, the status in SimLogger class. Actually, we can submit new subtasks in this function. We can add a new field to Task.java class to determine whetehr the task is a subtask or an atomic task.
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./figures/processCloudletReturn.png}
-	\caption{\label{fig:frog}ProcessCloudletReturn Function is Executed in MobileDeviceManager class.}
-\end{figure}
-
- In the simulation, so we choose only submit a task to virtual machine when its dependencies has been met. In the SimManager class, the startEntity() function creates all the virtual machines in cloud server, edge server and mobile server. Besides, it also submits all the tasks to virtual machines. But in this project, we only submit the tasks whose dependencies has been met at this time. When a task is finished, it will send a CLOUDLET\_RETURN event to DatacenterBroker. In EdgeCloudSim, this event will be sent to MobileDeviceManager. Then processCloudletReturn function will be triggered. So when a task is finished, the tasks that have not been submitted will be checked. If there are tasks whose dependencies has been met now, it will be submitted to the VM at this time. The submit of tasks are based on the schedule function. We implement these functions in MobileDeviceManager class.
-
-In processCloudletReturn function, it will test the execution place of the task, if it is executed in GENERIC\_EDGE\_DEVICE\_ID, the download delay will be added to the task, if it is executed in mobile device, the delay do not need to be add. We can test whether we need to submit new tasks to virtual machines at the  beginning of the function. 
-
-\subsubsection{Task-based Application Design}
-In this section introduces the design of task-based application based on EdgeCloudSim.
-
-\subsubsection{Structure and Loading of Applications.xml}
-The Applications.xml describes the types and parameters of applications in the simulation. Parameters in the original Applications.xml file of EdgeCloudSim is not explained, which makes it difficult to understand the meaning of these parameters. Figure 9 is an example of configurations of task-based applications. Figure 10 shows the original configurations of atomic applications.
-The meanings of the parameters are listed as follows:
-
+\subsection{Allocation of Kernel-Based Application}
+The allocation of kernel-based application is based on the following steps.
+First, the parameters of different kinds of applications is loaded into SimSettings.java and stored in the following variables:
 \begin{enumerate}
-	\item usage\_percentage: The usage percentage here is used to decide the percentage of this type of application in all of the tasks generated. So add up usage\_percentage field in the applications.xml, we can get 100 because we have sumed up all the percentages of all applications.
-	\item prob\_cloud\_selection: The probability that we choose the cloud to execute the task.
-	\item poisson\_interarrival:
-	\item active\_period: In active period, the edge devices can generate new tasks.
-	\item idle\_period: In idle period, the edge devices can not generate new tasks.
+	\item private double[][] applicationLookUpTable: store the parameters of applications.
+	\item private double[][] kernelInKernelBasedAPPLookUpTable: store the parameters of kernels in kernel-based application
 \end{enumerate}
 
+Then load generator will generate all the applications and set their start time. The following code only contains some important lines from LoadGenerator. Singleton KernelBasedApplicationStatus stores all the runtime information of the kernel-based applications. All LernelBasedApplication instance are  stored in KernelBasedApplicationStatus. At this time, we only create the kernel ID and create an kernelProperty instance for each kernel to store its information. An instance of Kernel.java will be created later and the runtime information will be stored in the kernel instance.  Moreover, a kernelPropertyList is created and stores the proeprty of al the kernels.
+\lstinputlisting{./code/loadGenerator.java}
+
+When simulation starts, SimManager will loop over  kernelPropertyList. It will check whether the kernel belongs to a kernel-based application that have multiple kernels. If it is, the kernels that dependencies have been met will be extracted. Then event of submitting these kernels at the start time of the applicaions that they belong to will be added for these kernels. If it is an application with a single kernel, an event of submitting this kenel at the start time of the corresponding applications will be added. The code are shown as follows.
+\lstinputlisting{./code/SimManagerSubmit.java}
+
+When some kenels in kernel-based applications ends, there may be some kernels that can be submitted. The dependencies between kernels are maintained in KernelBasedApplicationStatus. When MobileDeviceManager knows some kernels ends. It will check whether the task is a kernel in kernel-based applications that have multiple kernels. If it is, Then it will check whether there are other kernels can be submitted after the ending of this kernel. If there are such kernels, the kernels will sbumitted. How to submit these kernels are described at the end of section 3.1.
+
+\subsection{Mapping between Kernel-Based Application and it's kernel}
+
+
+\subsection{Classes Implementation}
+
+\subsubsection{KernelProperty.java}
+KernelProperty.java are changed from the taskProperty.java in EdgeCloudSim. The kernelProperty.java are instantiated in load generator module. And the kernel ID are also generated in load generator and stored in KernelProperty.java.The fields in KernelProperty.java are listed as follows:
+\lstinputlisting{./code/KernelProperty.java}
+
+
+\subsubsection{Kernel.java}
+Kernel.java are changed from Task.java in EdgeCloudSim. Kernel.java extends Cloudlet.java class from CloudSim. In CloudSim, Cloudlet is the task scheduled and executed. Kernel will be submitted to CloudSim base. KernelProperty.java are instantiated using KernelProperty.java. Some fields in Kernel.java are determined in run-time. For example, mobileDeviceId, hostIndex, vmIndex, datacenterId are determined in runtime using the scheduling and dispatching algorithm.
+\lstinputlisting{./code/Kernel.txt}
+
+
+
+\subsubsection{KernelBasedApplicationSettings.java}
+KernelBasedApplicationSettings.java is used to store the task dependency. The following code shows the fields in KernelBasedApplicationSettings.java. Table 1 shows  an example of dependency in KernelBasedApplicationSettings.java. If kernel 1 depends on kernel 2, then the value whose row is 1 and column is 2 is 1. Otherwise, the value in the table is 0. In the example given by the table, kernel 1 and kernel 2 can start at the start time of the application. Kernel 3 can only start after the end of kernel 1. Kernel 4 can only start after the end of kernel 1 and kernel 2.
+
+\lstinputlisting{./code/KernelBasedApplicationSettings.java}
+
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c}
+	\hline 
+	0 & 0  & 0 & 0\\
+	\hline  
+	0 & 0 & 0 & 0\\
+	\hline
+	1 & 0  & 0 & 0\\
+	\hline  
+	1 & 1 & 0 & 0\\
+	\hline 
+	\end{tabular}
+	\caption{\label{tab:widgets}An example of dependency in KernelBasedApplicationSettings.java.}
+\end{table}
+
+
+\subsubsection{KernelBasedApplication.java}
+This class is created in load generator. When we initialize the simulation, all the application that will be created in the simulation is determined and this class is instanciated. This class is used to store the runtime status of the kernel-based application. Some important fields of this class are shown as follows:
+\lstinputlisting{./code/KernelBasedApplication.java}
+
+\subsubsection{KernelBasedApplicationStatus.java}
+This class is a singleton and stores all the instance of KernelBasedApplication.java. Each module can access this class using the static function getInstance in KernelBasedApplicationStatus.java class. Some important fields of this class are shown as follows:
+\lstinputlisting{./code/KernelBasedApplicationStatus.java}
+
+\subsubsection{SimLogger.java and LogItem.java}
+
+
+A new field kernelId is added to the LogItem.java class to map map the kernel to the log LogItem.
+\lstinputlisting{./code/LogItem.java}
+
+\subsection{Simulation Workflow}
+
+The simulation works in the following steps. First SimManager will use the class SimSettings to load the settings about the application types, edge server, and some other parameters. 
+
+The generation of applications are in two phase. In the first phase, SimManager will utilize LoadGenerator to generate the applications that will be scheduled in the simulation. In this process, LoadGenerator will use Possion process to get the arrival time of each applications and use the parameters in SimSettings to generate the positions of each applicaion. Then comes to the second phase, it's a loop to submit the kernels in the application to be scheduled. The loop ends when the simulation comes to the end of the simulation time. In each loop, SimManager will check its the events that needs to be processed at that time. Before the start of the loop, there are two types of events that are determined. The first type is the kernel in applications that only have one kernel. Their start time are determined so the submitting those kernel at the start time of the kernel-based application is added to the events of SimManager. The other type of events is related to the kernels of kernel-based application. The  events of submitting kernels that do not have any dependencies in kernel-based applications  will be added. When some kernels finishes, some other kernels that depends on it can be submitted at that time. The events of submitting these kernels will be  added at run time.
+
 \begin{figure}
 	\centering
-	\includegraphics[width=1\textwidth]{./figures/task-based-xml.png}
-	\caption{\label{fig:frog}Example of XML file of Task-based applications.}
+	\includegraphics[width=1\textwidth]{./UML/sequence-diagram-create-kernel.png}
+	\caption{\label{fig:create-kernel}Modules and functions related to create and submit kernel.}
 \end{figure}
+
+After the kernel is submitted, it is scheduled in CloudSim. Figure  shows the Cloudlet processing update process in CloudSim. The original in the paper about CloudSim is wrong. Figure 2 is the fixed figure about Cloudlet processing update process. EdgeCloudSim will decide the device(DataCenter in CloudSim), host, and virtual machine to submit the kernel in runtime. After submitting the kernel, the schedulling process in the virtual machines is handled by CloudSim.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=1\textwidth]{./figures/atomic-application-xml.png}
-	\caption{\label{fig:frog}Example of XML file of Atomic Applications.}
+	\includegraphics[width=1\textwidth]{./figures/3-processingSequence.png}
+	\caption{\label{fig:processingSequence}Cloudlet processing update process.}
 \end{figure}
-
-The parameters are loaded in SimSettings.java. A new class called TaskBasedApplication.java is also implemented. The parameters of the applications and sub-applications are stored in the following two variables.
-
-\begin{enumerate}
-	\item private double[][] taskLookUpTable: store the parameters of applications.
-	\item private double[][] subtaskLookUpTable: store the parameters of sub-applications.
-	\item private TaskBasedApplication[] dependencyLookUpTable: store the dependency of each task-based application.
-\end{enumerate}
-
-
-
-\subsubsection{Sub-task Submission Using Topological Order}
-In the class LoadGenerator, we generate the list properties of all tasks including all the sub tasks. The dependencies between all the sub-tasks are maintained in a list of objects of TaskBasedTask.java. The dependencies of them are maintained in this class. The reference of the LoadGenerator instance will be added to the instance of MobileDeviceManager. When MobileDeviceManager knows some tasks ends. It will check whether the task is a sub-task. If it is a sub-task. Then it will check whether there are other sub-tasks can be executed after the ending of this sub-task. If there are such tasks, the tasks will be send to datacenter using the function schedule.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./figures/y-1generator.png}
-	\caption{\label{fig:frog}exponential number generator for sub-task.}
-\end{figure}
-
-
-The following picture shows how this project generate task properties for atomic task and bask-based task. After generating the random task type for edge devices, we judge whether it is a task-based task. If it is a task-based task, we will generate the properties of these sub-tasks.
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./figures/y-2generator.png}
-	\caption{\label{fig:frog}Generate task properties for atomic task and task-based task.}
-\end{figure}
-
-The dependencies of sub-task in task-based applications are handled in class TaskBasedApplication. This class can check the status of each task using two private variables called submitted and dependency. 
-
-In this project, a class called TaskBasedTask.java is implemented to store the information of task-based task. This class can store the dependencies between each sub-tasks. We can trigger a function in the class to record the tasks that have finished. Moreover, it can calculate the sub-tasks that can be executed at this time. The object of TaskBasedTask will utilize the information stored in TaskBasedApplication to generate the dependencies of sub-tasks.
-
-
-Now I think add a new class TaskBasedTask.java with static variables. Each object can acccess the static instance in this class. This class can be used to log the status of all the task-based applications.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./figures/IdleActiveLoadGenerator-TaskBasedTask.png}
-	\caption{\label{fig:frog}Initialize TaskBasedTaskStatus in IdleActiveLoadGenerator.}
-\end{figure}
-
-The class TaskBasedTaskStatus.java and the class TaskBasedTask.java are fully tested using a test Java file. Moreover, in debug mode, the TaskBasedTaskStatus instance is as follows.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{./figures/TaskBasedTaskStatus-1.png}
-	\caption{\label{fig:frog}TaskBasedTaskStatus in Debug Mode.}
-\end{figure}
-
-\subsubsection{New Task Submission}
-Since in EdgeCloudSim, when we submit a task, the task will be scheduled. So when it comes to task-based task, the  sub-task can only be submitted after its dependencies  have been met. So when each sub-task finishes, the tasks that belong to the same task-based application with it will be checked. When a task finishes in EdgeCloudSim will execute the processCloudReturn function in MobileDeviceManager class. Actually, CloudSim will execute the processCloudReturn function in Broker. But the MobileDeviceManager cannot access the variables in object LoadGeneratorModel. But the the event of submitting new tasks can be done by sending  an event to SimManager. In the  meantime, the sub-task need to be set as submitted. In the class SimManager, a new label called CREATE\_SUB\_TASK is added. And the event is handled in the function processEvent in SimManager. Since we need to submit the new sub-tasks immediately, we use scheduleNow function to send the event of creating new sub-tasks in the system.
-
-\subsubsection{Component Diagram of the Simulation tool}
-After adding the feature, the component diagram has changed.
-
-\subsection{Task Migration}
-
-\subsection{Probabilistic Network Failure Model}
 
 \section{Experimental Results}
 In this section, we did some experiment. We test the failure rate.
@@ -360,61 +304,6 @@ In this section, we did some experiment. We test the failure rate.
 
 \section{Future Works}
 
-\section{Some \LaTeX{} Examples}
-\label{sec:examples}
 
-\subsection{Sections}
-
-Use section and subsection commands to organize your document. \LaTeX{} handles all the formatting and numbering automatically. Use ref and label commands for cross-references.
-
-\subsection{Comments}
-
-Comments can be added to the margins of the document using the \todo{Here's a comment in the margin!} todo command, as shown in the example on the right. You can also add inline comments too:
-
-\todo[inline, color=green!40]{This is an inline comment.}
-
-\subsection{Tables and Figures}
-
-Use the table and tabular commands for basic tables --- see Table~\ref{tab:widgets}, for example. You can upload a figure (JPEG, PNG or PDF) using the files menu. To include it in your document, use the includegraphics command as in the code for Figure~\ref{fig:frog} below.
-
-% Commands to include a figure:
-\begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth]{frog.jpg}
-\caption{\label{fig:frog}This is a figure caption.}
-\end{figure}
-
-\begin{table}
-\centering
-\begin{tabular}{l|r}
-Item & Quantity \\\hline
-Widgets & 42 \\
-Gadgets & 13
-\end{tabular}
-\caption{\label{tab:widgets}An example table.}
-\end{table}
-
-\subsection{Mathematics}
-
-\LaTeX{} is great at typesetting mathematics. Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
-$$S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
-      = \frac{1}{n}\sum_{i}^{n} X_i$$
-denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
-
-\subsection{Lists}
-
-You can make lists with automatic numbering \dots
-
-\begin{enumerate}
-\item Like this,
-\item and like this.
-\end{enumerate}
-\dots or bullet points \dots
-\begin{itemize}
-\item Like this,
-\item and like this.
-\end{itemize}
-
-We hope you find write\LaTeX\ useful, and please let us know if you have any feedback using the help menu above.
 
 \end{document}

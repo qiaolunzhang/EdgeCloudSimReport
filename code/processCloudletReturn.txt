@@ -1,0 +1,9 @@
+if (KernelBasedApplicationStatus.getInstance().checkKernelInKBApp(kernelId)) {
+	int simManagerId = KernelBasedApplicationStatus.getInstance().getSimManagerId();
+	// in the meanwhile set the kernel as finished 
+	List<Integer> kernelListReadySubmit = KernelBasedApplicationStatus.getInstance().getKernelSubmit(kernelId);
+	for (int i=0; i < kernelListReadySubmit.size(); i++) {
+		scheduleNow(simManagerId, 5, kernelListReadySubmit.get(i));
+	}
+
+}

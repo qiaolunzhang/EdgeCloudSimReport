@@ -1,0 +1,8 @@
+case CREATE_KERNEL_IN_KBAPP:
+	int kernelId = (int) ev.getData();
+	//boolean ready_to_submit = KernelBasedApplicationStatus.getInstance().checkReadySubmit(kernelId);
+	//get the kernel list index in load generator
+	int kernelPropertyIndex = loadGeneratorModel.getKernelPropertyIndex(kernelId);
+	KernelProperty kernelProperty = loadGeneratorModel.getKernelPropertyList().get(kernelPropertyIndex);
+	mobileDeviceManager.submitKernel(kernelProperty);
+	KernelBasedApplicationStatus.getInstance().setKernelSubmit(kernelId);

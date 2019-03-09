@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<applications>
+	<application name="TASK_BASED_APP">
+		<usage_percentage>100</usage_percentage>
+		<prob_cloud_selection>20</prob_cloud_selection>
+		<poisson_interarrival>2</poisson_interarrival>
+		<active_period>40</active_period>
+		<idle_period>20</idle_period>
+		<data_upload>6000</data_upload>
+		<data_download>1000</data_download>
+		<application_length>48000</application_length>
+		<required_core>1</required_core>
+		<vm_utilization_on_edge>8</vm_utilization_on_edge>
+		<vm_utilization_on_cloud>0.8</vm_utilization_on_cloud>
+		<vm_utilization_on_mobile>20</vm_utilization_on_mobile>
+		<kernels>
+			<kernel name="kernel1">
+				<usage_percentage>100</usage_percentage>
+				<prob_cloud_selection>20</prob_cloud_selection>
+				<poisson_interarrival>2</poisson_interarrival>
+				<active_period>40</active_period>
+				<idle_period>20</idle_period>
+				<data_upload>1500</data_upload>
+				<data_download>250</data_download>
+				<kernel_length>12000</kernel_length>
+				<required_core>1</required_core>
+				<vm_utilization_on_edge>8</vm_utilization_on_edge>
+				<vm_utilization_on_cloud>0.8</vm_utilization_on_cloud>
+				<vm_utilization_on_mobile>20</vm_utilization_on_mobile>
+				<sub_application_number>0</sub_application_number>
+				<num_dependency>0</num_dependency>
+			</kernel>
+			<kernel name="kernel2">
+				<usage_percentage>100</usage_percentage>
+				<prob_cloud_selection>20</prob_cloud_selection>
+				<poisson_interarrival>2</poisson_interarrival>
+				<active_period>40</active_period>
+				<idle_period>20</idle_period>
+				<data_upload>1500</data_upload>
+				<data_download>250</data_download>
+				<kernel_length>12000</kernel_length>
+				<required_core>1</required_core>
+				<vm_utilization_on_edge>8</vm_utilization_on_edge>
+				<vm_utilization_on_cloud>0.8</vm_utilization_on_cloud>
+				<vm_utilization_on_mobile>20</vm_utilization_on_mobile>
+				<sub_application_number>1</sub_application_number>
+				<num_dependency>0</num_dependency>
+				<dependency>0</dependency>
+			</kernel>
+		</kernels>
+	</application>
+</applications>

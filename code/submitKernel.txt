@@ -1,0 +1,24 @@
+public void submitKernel(KernelProperty edgeTask) {
+	NetworkModel networkModel = SimManager.getInstance().getNetworkModel();
+	
+	//create a task
+	Kernel task = createTask(edgeTask);
+	
+	Location currentLocation = SimManager.getInstance().getMobilityModel().
+			getLocation(task.getMobileDeviceId(),CloudSim.clock());
+	
+	//set location of the mobile device which generates this task
+	task.setSubmittedLocation(currentLocation);
+
+	//add related task to log list
+	SimLogger.getInstance().addLog(task.getCloudletId(),
+			task.getKernelType(),
+			(int)task.getCloudletLength(),
+			(int)task.getCloudletFileSize(),
+			(int)task.getCloudletOutputSize(),
+			(int)task.getKernelId());
+
+	int nextHopId = SimManager.getInstance().getEdgeOrchestrator().getDeviceToOffload(task);
+	......
+	......
+}

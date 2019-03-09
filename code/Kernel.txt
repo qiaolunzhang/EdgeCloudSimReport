@@ -1,0 +1,7 @@
+private int type;
+private int mobileDeviceId;
+private int hostIndex;
+private int vmIndex;
+private int datacenterId;
+private int kernelId;
+private Location submittedLocation;
